@@ -10,6 +10,7 @@ namespace csharp_algorithm_study
             BubbleSort();
         }
 
+        // 가장 작은 값을 선택해서 앞으로 보냄
         static void SelectionSort()
         {
             int i, j, min, index = 0, temp;
@@ -36,14 +37,14 @@ namespace csharp_algorithm_study
             }
         }
 
-        // 옆에 있는 값과 비교해서 더 작은 값을 앞으로 보        // 구현하기 쉽지만 가장 비효율적
+        // 옆에 있는 값과 비교해서 더 작은 값을 앞으로 보냄
         static void BubbleSort()
         {
             int i, j, temp;
             int[] array = { 1, 10, 5, 8, 7, 6, 4, 3, 2, 9 };
             for (i = 0; i < 10; i++)
             {
-                for (j = 0; j < 10 - i; j++)
+                for (j = 0; j < 9 - i; j++)
                 {
                     if (array[j] > array[j + 1])
                     {
