@@ -12,8 +12,11 @@ namespace csharp_algorithm_study
             //SelectionSort();
             //BubbleSort();
             //InsertionSort();
-            QuickSort(0, number - 1);
-            Show();
+            //QuickSort(0, number - 1);
+            //Show();
+
+            //Sort1(); // 기초 정렬문제 1
+            Sort2(); // 기초 정렬문제 2
         }
 
         static void Show()
@@ -23,6 +26,78 @@ namespace csharp_algorithm_study
                 Console.Write(array[i] + " ");
             }
         }
+
+        // 일반적인 온라인 채점 시스템의 경우 대략 일초에 일억번정도 연산을 할 수 있다고 가정 하고 푼다.
+        // 시간제한 1초 - 1000제곱은 백만 - 백만정도면 정말작은 숫자 큰문제 x - 세가지 정렬중 아무거나
+        // https://www.acmicpc.net/problem/2750
+        static void Sort1()
+        {
+            int[] array = new int[1001]; // +1 심신안정
+            int number, i, j, min, index = 0, temp;
+            number = Convert.ToInt32(Console.ReadLine());
+
+            for (i = 0; i < number; i++)
+            {
+                array[i] = Convert.ToInt32(Console.ReadLine());
+            }
+            for (i = 0; i < number; i++)
+            {
+                min = 1001;
+                for (j = i; j < number; j++)
+                {
+                    if(min > array[j])
+                    {
+                        min = array[j];
+                        index = j;
+                    }
+                }
+
+                temp = array[index];
+                array[index] = array[i];
+                array[i] = temp;
+            }
+
+            for (i = 0; i < number; i++)
+            {
+                Console.WriteLine(array[i]);
+            }
+        }
+
+        // https://www.acmicpc.net/problem/2752
+        static void Sort2()
+        {
+            int[] array = new int[3];
+            int i, j, min, index = 0, temp;
+
+            string[] input = Console.ReadLine().Split(' ');
+
+            for (i = 0; i < 3; i++)
+            {
+                array[i] = Convert.ToInt32(input[i]);
+            }
+            for (i = 0; i < 3; i++)
+            {
+                min = 1000001;
+                for (j = i; j < 3; j++)
+                {
+                    if (min > array[j])
+                    {
+                        min = array[j];
+                        index = j;
+                    }
+                }
+
+                temp = array[index];
+                array[index] = array[i];
+                array[i] = temp;
+            }
+
+            for (i = 0; i < 3; i++)
+            {
+                Console.Write(array[i] + " ");
+            }
+        }
+
 
 
         // 특정한 값을 기준으로 큰 숫자와 작은 숫자를 나눔
