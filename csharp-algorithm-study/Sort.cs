@@ -4,8 +4,12 @@ namespace csharp_algorithm_study
 {
     public class Sort
     {
-        static int number = 10;
+        // 선택, 버블, 삽입, 퀵 정렬
         static int[] array = { 1, 10, 5, 8, 7, 6, 4, 3, 2, 9 };
+
+        // 병합 정렬
+        static int number = 8;
+        static int[] sorted = new int[8]; // 정렬 배열은 반드시 전역 변수로 선언
 
         static void Main(string[] args)
         {
@@ -16,9 +20,16 @@ namespace csharp_algorithm_study
             //Show();
 
             //Sort1(); // 기초 정렬문제 1
-            Sort2(); // 기초 정렬문제 2
-        }
+            //Sort2(); // 기초 정렬문제 2
 
+            int[] array = { 7, 6, 5, 8, 3, 5, 9, 1 };
+            MergeSort(array, 0, number - 1);
+            for (int i = 0; i < number; i++)
+            {
+                Console.Write(array[i] + " ");
+            }
+        }
+       
         static void Show()
         {
             for (int i = 0; i < number; i++)
@@ -26,6 +37,69 @@ namespace csharp_algorithm_study
                 Console.Write(array[i] + " ");
             }
         }
+
+        // 너비 N, 높이 logN 으로 속도 NlogN 보장
+        // 두 개의 정렬된 부분 배열을 이용해 새롭게 정렬된 배열을 만듬
+        // 일단 정확히 반으로 나누고 나중에 정렬
+        static void Merge(int[] a, int m, int middle, int n)
+        {
+            int i = m;
+            int j = middle + 1;
+            int k = m;
+
+            // 작은 순서대로 배열에 삽입
+            while(i <= middle && j <= n)
+            {
+                if(a[i] <= a[j])
+                {
+                    sorted[k] = a[i];
+                    i++;
+                }
+                else
+                {
+                    sorted[k] = a[j];
+                    j++;
+                }
+                k++;
+            }
+
+            // 남은 데이터도 삽입
+            if (i > middle)
+            {
+                for (int t = j; t <= n; t++)
+                {
+                    sorted[k] = a[t];
+                    k++;
+                }
+            }
+            else
+            {
+                for (int t = i; t <= middle; t++)
+                {
+                    sorted[k] = a[t];
+                    k++;
+                }
+            }
+
+            // 정렬된 배열을 삽입
+            for(int t = m; t <= n; t++)
+            {
+                a[t] = sorted[t];
+            }
+
+        }
+
+        static void MergeSort(int[] a, int m, int n)
+        {
+            if(m < n)
+            {
+                int middle = (m + n) / 2;
+                MergeSort(a, m, middle); // 왼쪽 정
+                MergeSort(a, middle + 1, n); // 오른쪽 정렬
+                Merge(a, m, middle, n); // 합친다
+            }
+        }
+
 
         // 일반적인 온라인 채점 시스템의 경우 대략 일초에 일억번정도 연산을 할 수 있다고 가정 하고 푼다.
         // 시간제한 1초 - 1000제곱은 백만 - 백만정도면 정말작은 숫자 큰문제 x - 세가지 정렬중 아무거나
