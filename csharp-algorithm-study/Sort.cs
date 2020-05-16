@@ -5,11 +5,15 @@ namespace csharp_algorithm_study
     public class Sort
     {
         // 선택, 버블, 삽입, 퀵 정렬
-        static int[] array = { 1, 10, 5, 8, 7, 6, 4, 3, 2, 9 };
+        static int[] quickArr = { 1, 10, 5, 8, 7, 6, 4, 3, 2, 9 };
 
         // 병합 정렬
         static int number = 8;
         static int[] sorted = new int[8]; // 정렬 배열은 반드시 전역 변수로 선언
+        static int[] mergeArr = { 7, 6, 5, 8, 3, 5, 9, 1 };
+
+        // 힙 정렬
+        static int[] heapArr = { 7, 6, 5, 8, 3, 5, 9, 1, 6 };
 
         static void Main(string[] args)
         {
@@ -17,24 +21,79 @@ namespace csharp_algorithm_study
             //BubbleSort();
             //InsertionSort();
             //QuickSort(0, number - 1);
-            //Show();
 
             //Sort1(); // 기초 정렬문제 1
             //Sort2(); // 기초 정렬문제 2
 
-            int[] array = { 7, 6, 5, 8, 3, 5, 9, 1 };
-            MergeSort(array, 0, number - 1);
+            //MergeSort(mergeArr, 0, number - 1);
+            //Show(mergeArr);
+
+            HeapSort();
+            Show(heapArr);
+
+
+        }
+       
+        static void Show(int[] array)
+        {
             for (int i = 0; i < number; i++)
             {
                 Console.Write(array[i] + " ");
             }
         }
-       
-        static void Show()
+
+
+        // 하나의 노드를 제외하고 최대 힙이 구성되어 있다고 가정했을 때,
+        // 그 하나의 노드에 대해서 힙 생성 알고리즘(Heapify Algorithm)을 사용해서 힙구조를 만들어줌        // n 힙구조 전체갯수에서 1/2번만큼만 히피파이 수행
+        // 상향식, 하향식 아무거나
+        // 이제 정렬 시작
+        // 제일 위 노드와 가장 아래 노드를 바꿔주고 이제 가장아래 노드가 젤큰값이니까
+        // 그거 제외하고 나머지 노드들에 대해서 다시 힙구조를 만들어줌(히피파이 수행) 반복        static void HeapSort()
         {
+            int number = 9;
+
+            // 처음 힙 구성
             for (int i = 0; i < number; i++)
             {
-                Console.Write(array[i] + " ");
+                int child = i;
+                do
+                {
+                    int root = (child - 1) / 2; // root 구하는 방식
+                    if (heapArr[root] < heapArr[child])
+                    {
+                        int temp = heapArr[root];
+                        heapArr[root] = heapArr[child];
+                        heapArr[child] = temp;
+                    }
+                    child = root;
+                } while (child != 0);
+            }
+
+            // 크기를 줄여가며 반복적으로 힙을 구성
+            for (int i = number - 1; i >= 0; i--) // 하향식
+            {
+                int temp = heapArr[0]; // 젤 큰값인 맨 위 노드를 제일 아래 노드와 바꿈
+                heapArr[0] = heapArr[i];
+                heapArr[i] = temp;
+                int root = 0;
+                int child = 1;
+                do
+                {
+                    child = 2 * root + 1;
+                    // 자식 중에 더 큰 값을 찾기
+                    if (child < i - 1 && heapArr[child] < heapArr[child + 1])
+                    {
+                        child++; // 오른쪽이 더크다 하면 차일드를 오른쪽으로 옮김
+                    }
+                    // 루트보다 자식이 크다면 교환
+                    if (child < i && heapArr[root] < heapArr[child])
+                    {
+                        temp = heapArr[root];
+                        heapArr[root] = heapArr[child];
+                        heapArr[child] = temp;
+                    }
+                    root = child;
+                } while (child < i);
             }
         }
 
@@ -187,26 +246,26 @@ namespace csharp_algorithm_study
 
             while (i <= j) // 엇갈릴 때까지 반복
             {
-                while (i <= end && array[i] <= array[key]) // 키 값보다 큰 값을 만날 때까지
+                while (i <= end && quickArr[i] <= quickArr[key]) // 키 값보다 큰 값을 만날 때까지
                 {
                     i++;
                 }
-                while (j > start && array[j] >= array[key]) // 키 값보다 작은 값을 만날 때까지
+                while (j > start && quickArr[j] >= quickArr[key]) // 키 값보다 작은 값을 만날 때까지
                 {
                     j--;
                 }
 
                 if (i > j) // 현재 엇갈린 상태면 키 값과 교체
                 {
-                    temp = array[j];
-                    array[j] = array[key];
-                    array[key] = temp;
+                    temp = quickArr[j];
+                    quickArr[j] = quickArr[key];
+                    quickArr[key] = temp;
                 }
                 else // 엇갈리지 않았다면 i와 j를 교체
                 {
-                    temp = array[i];
-                    array[i] = array[j];
-                    array[j] = temp;
+                    temp = quickArr[i];
+                    quickArr[i] = quickArr[j];
+                    quickArr[j] = temp;
                 }
             }
 
@@ -222,11 +281,11 @@ namespace csharp_algorithm_study
             for (i = 0; i < 9; i++)
             {
                 j = i; // 왼쪽은 정렬되었으니 안된 것 부터 오른쪽으로 체크
-                while (j >= 0 && array[j] > array[j + 1]) // 여기서 왼쪽 정렬된 것들 걸러냄
+                while (j >= 0 && quickArr[j] > quickArr[j + 1]) // 여기서 왼쪽 정렬된 것들 걸러냄
                 {
-                    temp = array[j];
-                    array[j] = array[j + 1];
-                    array[j + 1] = temp;    // 크면 바꾸고
+                    temp = quickArr[j];
+                    quickArr[j] = quickArr[j + 1];
+                    quickArr[j + 1] = temp;    // 크면 바꾸고
                     j--;                    // 오른쪽으로 가면서 체크
                 }
             }
@@ -240,11 +299,11 @@ namespace csharp_algorithm_study
             {
                 for (j = 0; j < 9 - i; j++)
                 {
-                    if (array[j] > array[j + 1])
+                    if (quickArr[j] > quickArr[j + 1])
                     {
-                        temp = array[j];
-                        array[j] = array[j + 1];
-                        array[j + 1] = temp;
+                        temp = quickArr[j];
+                        quickArr[j] = quickArr[j + 1];
+                        quickArr[j + 1] = temp;
                     }
                 }
             }
@@ -259,15 +318,15 @@ namespace csharp_algorithm_study
                 min = 9999;
                 for (j = i; j < 10; j++)
                 {
-                    if (min > array[j])
+                    if (min > quickArr[j])
                     {
-                        min = array[j];
+                        min = quickArr[j];
                         index = j;
                     }
                 }
-                temp = array[i];
-                array[i] = array[index];
-                array[index] = temp;
+                temp = quickArr[i];
+                quickArr[i] = quickArr[index];
+                quickArr[index] = temp;
             }
         }
 
