@@ -28,8 +28,10 @@ namespace csharp_algorithm_study
             //MergeSort(mergeArr, 0, number - 1);
             //Show(mergeArr);
 
-            HeapSort();
-            Show(heapArr);
+            //HeapSort();
+            //Show(heapArr);
+
+            CountingSort();
 
 
         }
@@ -42,13 +44,45 @@ namespace csharp_algorithm_study
             }
         }
 
+        // 크기를 기준으로 갯수만 세주면 됨
+        static void CountingSort()
+        {
+            int[] count = new int[6]; // +1
+            int[] array = {1, 3, 2, 4, 3, 2, 5, 3, 1, 2,
+                           3, 4, 4, 3, 5, 1, 2, 3, 5, 2,
+                           3, 1, 4, 3, 5, 1, 2, 1, 1, 1};
+
+            for (int i = 1; i <= 5; i++)
+            {
+                count[i] = 0;
+            }
+            for (int i = 0; i < array.Length; i++)
+            {
+                count[array[i]]++;
+            }
+            for (int i = 1; i <= 5; i++)
+            {
+                if (count[i] != 0)
+                {
+                    for (int j = 0; j < count[i]; j++)
+                    {
+                        Console.Write(i + " ");
+                    }
+                }
+                
+            }
+
+
+        }
+
 
         // 하나의 노드를 제외하고 최대 힙이 구성되어 있다고 가정했을 때,
         // 그 하나의 노드에 대해서 힙 생성 알고리즘(Heapify Algorithm)을 사용해서 힙구조를 만들어줌        // n 힙구조 전체갯수에서 1/2번만큼만 히피파이 수행
         // 상향식, 하향식 아무거나
         // 이제 정렬 시작
         // 제일 위 노드와 가장 아래 노드를 바꿔주고 이제 가장아래 노드가 젤큰값이니까
-        // 그거 제외하고 나머지 노드들에 대해서 다시 힙구조를 만들어줌(히피파이 수행) 반복        static void HeapSort()
+        // 그거 제외하고 나머지 노드들에 대해서 다시 힙구조를 만들어줌(히피파이 수행) 반복
+        static void HeapSort()
         {
             int number = 9;
 
@@ -70,7 +104,7 @@ namespace csharp_algorithm_study
             }
 
             // 크기를 줄여가며 반복적으로 힙을 구성
-            for (int i = number - 1; i >= 0; i--) // 하향식
+            for (int i = number - 1; i >= 0; i--) // 상향식
             {
                 int temp = heapArr[0]; // 젤 큰값인 맨 위 노드를 제일 아래 노드와 바꿈
                 heapArr[0] = heapArr[i];
