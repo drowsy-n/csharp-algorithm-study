@@ -31,8 +31,9 @@ namespace csharp_algorithm_study
             //HeapSort();
             //Show(heapArr);
 
-            CountingSort();
+            //CountingSort();
 
+            new StackQueue().Stack();
 
         }
        
