@@ -29,5 +29,23 @@ namespace csharp_algorithm_study
 
             }
         }
+
+        // 먼저 들어온 것이 먼저 나감(FIFO)
+        public void Queue()
+        {
+            Queue<int> queue = new Queue<int>();
+            queue.Enqueue(7);
+            queue.Enqueue(5);
+            queue.Enqueue(4);
+            queue.Dequeue();
+            queue.Enqueue(6);
+            queue.Dequeue();
+            while (queue.Count > 0)
+            {
+                Console.Write(queue.Dequeue() + " ");
+
+            }
+
+        }
     }
 }
