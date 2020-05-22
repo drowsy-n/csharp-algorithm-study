@@ -33,7 +33,9 @@ namespace csharp_algorithm_study
 
             //CountingSort();
 
-            new StackQueue().Queue();
+            //new StackQueue().Queue();
+
+            new Search();
 
         }
        
