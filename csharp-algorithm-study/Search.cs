@@ -44,7 +44,8 @@ namespace csharp_algorithm_study
             a[6].Add(7);
             a[7].Add(6);
 
-            BFS(1);
+            //BFS(1);
+            DFS(1);
         }
 
         // 너비 우선 탐색
@@ -67,6 +68,19 @@ namespace csharp_algorithm_study
                         c[y] = true; // 방문 처리  
                     }
                 }
+            }
+        }
+
+        // 깊이 우선 탐색
+        public void DFS(int x)
+        {
+            if (c[x]) return;
+            c[x] = true;
+            Console.Write(x + " ");
+            for (int i = 0; i < a[x].Count; i++)
+            {
+                int y = a[x][i];
+                DFS(y);
             }
         }
     }
