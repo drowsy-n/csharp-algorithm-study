@@ -35,7 +35,9 @@ namespace csharp_algorithm_study
 
             //new StackQueue().Queue();
 
-            new Search();
+            //new Search();
+
+            new UnionFind();
 
         }
        
