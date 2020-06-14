@@ -5,21 +5,21 @@ namespace csharp_algorithm_study
     {
         public UnionFind()
         {
-            int[] parent = new int[11];
-            for (int i = 0; i <= 10; i++)
-            {
-                parent[i] = i;
-            }
+            //int[] parent = new int[11];
+            //for (int i = 0; i <= 10; i++)
+            //{
+            //    parent[i] = i;
+            //}
 
-            UnionParent(parent, 1, 2);
-            UnionParent(parent, 2, 3);
-            UnionParent(parent, 3, 4);
-            UnionParent(parent, 5, 6);
-            UnionParent(parent, 6, 7);
-            UnionParent(parent, 7, 8);
-            Console.WriteLine("1과 5가 연결되어있나요? " + FindParent(parent, 1, 5));
-            UnionParent(parent, 2, 8);
-            Console.WriteLine("1과 5가 연결되어있나요? " + FindParent(parent, 1, 5));
+            //UnionParent(parent, 1, 2);
+            //UnionParent(parent, 2, 3);
+            //UnionParent(parent, 3, 4);
+            //UnionParent(parent, 5, 6);
+            //UnionParent(parent, 6, 7);
+            //UnionParent(parent, 7, 8);
+            //Console.WriteLine("1과 5가 연결되어있나요? " + FindParent(parent, 1, 5));
+            //UnionParent(parent, 2, 8);
+            //Console.WriteLine("1과 5가 연결되어있나요? " + FindParent(parent, 1, 5));
         }
 
         

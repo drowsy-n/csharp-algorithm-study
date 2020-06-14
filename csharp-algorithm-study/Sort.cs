@@ -37,7 +37,8 @@ namespace csharp_algorithm_study
 
             //new Search();
 
-            new UnionFind();
+            //new UnionFind();
+            new KruskalAlgorithm();
 
         }
        
