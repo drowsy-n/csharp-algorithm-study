@@ -39,7 +39,8 @@ namespace csharp_algorithm_study
 
             //new UnionFind();
             //new KruskalAlgorithm();
-            new DynamicProgramming();
+            //new DynamicProgramming();
+            new GreedyAlgorithm();
 
         }
        
